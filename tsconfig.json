@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    // Path resolution
+    "baseUrl": "./",
+    "moduleResolution": "node16",
+    // Build settings
+    "module": "node16",
+
+    // Features
+    "allowJs": true,
+    "checkJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    // Strictness / Correctness
+    "strict": true,
+
+    // Output
+    "noEmit": true,
+    "paths": {
+      "types": ["./src/types.ts"]
+    }
+  }
+}
+
