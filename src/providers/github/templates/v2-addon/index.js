@@ -6,6 +6,7 @@ import { stripIndent } from 'common-tags';
 import yaml from 'js-yaml';
 
 import { verifyConfig } from './config.js';
+import { getEmberTryNames } from './ember-try.js';
 
 const targetFile = '.github/workflows/ci.yml';
 
@@ -200,6 +201,19 @@ async function buildCi(config, options) {
   }
 
   if (support?.['ember-try']) {
+    let scenarios = [];
+
+    if (support['ember-try'] === true) {
+      scenarios = await getEmberTryNames(config, options);
+    } else if (Array.isArray(support['ember-try'])) {
+      scenarios = support['ember-try'];
+    } else {
+      assert(
+        false,
+        'Unknown value type for support.ember-try. Expected an array of scenario names or `true`.'
+      );
+    }
+
     tryScenarios = {
       'try-scenarios': {
         name: '${{ matrix.ember-try-scenario }}',
@@ -209,7 +223,7 @@ async function buildCi(config, options) {
         strategy: {
           'fail-fast': true,
           matrix: {
-            'ember-try-scenario': config.support['ember-try'],
+            'ember-try-scenario': scenarios,
           },
         },
         steps: [
