@@ -67,6 +67,13 @@ support:
    - typescript@4.6
    - typescript@4.7
 
+  # optionally use the glint bin instead of tsc
+  glint: true
+
+  # reads the config/ember-try.js config file
+  ember-try: true
+
+  # specify specific entries. must be a subset of config/ember-try.js
   ember-try:
     - ember-3.25
     - ember-3.26

@@ -45,7 +45,7 @@ const actions = {
   downloadArtifact: 'actions/download-artifact@v3',
   uploadArtifact: 'actions/upload-artifact@v3',
   volta: 'volta-cli/action@v1',
-  commitlint: 'wagoid/commitlint-github-action@v4.1.12',
+  commitlint: 'wagoid/commitlint-github-action@v5.0.1',
 };
 
 let init = [{ uses: actions.checkout }, { uses: actions.volta }];
@@ -166,6 +166,11 @@ async function buildCi(config, options) {
   if (config.support?.typescript) {
     assert(Array.isArray(config.support.typescript), 'expected support.typescript to be an array');
 
+    let isGlint = config.support?.glint ?? false;
+
+    let versionCommand = isGlint ? `glint --version` : 'tsc -v';
+    let buildCommand = isGlint ? `glint` : 'tsc --build';
+
     typescript = {
       'typescript-compatibility': {
         name: '${{ matrix.typescript-scenario }}',
@@ -192,8 +197,8 @@ async function buildCi(config, options) {
           {
             name: 'Type checking',
             run:
-              `pnpm --filter ${testAppName} exec tsc -v;\n` +
-              `pnpm --filter ${testAppName} exec tsc --build`,
+              `pnpm --filter ${testAppName} exec ${versionCommand};\n` +
+              `pnpm --filter ${testAppName} exec ${buildCommand}`,
           },
         ],
       },

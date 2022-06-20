@@ -12,7 +12,7 @@ const topLevelKeys = [
   'testApp',
   ...genericTopLevelKeys,
 ];
-const supportKeys = ['typescript', 'ember-try'];
+const supportKeys = ['glint', 'typescript', 'ember-try'];
 const releaseKeys = ['semantic'];
 const buildKeys = ['run', 'expect'];
 

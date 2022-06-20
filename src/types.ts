@@ -17,8 +17,9 @@ export type GitHubConfig = Config & {
 export type GitHubV2AddonConfig = GitHubConfig & {
   build: { run: string; expect: string },
   support?: {
-    typescript?: Array<`typescript@{number}.{number}`>;
-    'ember-try'?: Array<string>;
+    glint?: boolean;
+    typescript?: boolean | Array<`typescript@{number}.{number}`>;
+    'ember-try'?: boolean | Array<string>;
   },
   lint?: {
     commits?: boolean;
