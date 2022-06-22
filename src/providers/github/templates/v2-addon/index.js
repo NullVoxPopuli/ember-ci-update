@@ -168,7 +168,6 @@ async function buildCi(config, options) {
 
     let isGlint = config.support?.glint ?? false;
 
-    let versionCommand = isGlint ? `glint --version` : 'tsc -v';
     let buildCommand = isGlint ? `glint` : 'tsc --build';
 
     typescript = {
@@ -197,7 +196,8 @@ async function buildCi(config, options) {
           {
             name: 'Type checking',
             run:
-              `pnpm --filter ${testAppName} exec ${versionCommand};\n` +
+              `pnpm --filter ${testAppName} exec tsc -v; ` +
+              (isGlint ? `pnpm --filter ${testAppName} exec glint --version; ` : '') +
               `pnpm --filter ${testAppName} exec ${buildCommand}`,
           },
         ],
