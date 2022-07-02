@@ -45,7 +45,7 @@ const actions = {
   downloadArtifact: 'actions/download-artifact@v3',
   uploadArtifact: 'actions/upload-artifact@v3',
   volta: 'volta-cli/action@v1',
-  commitlint: 'wagoid/commitlint-github-action@v5.0.1',
+  commitlint: 'wagoid/commitlint-github-action@v5.0.2',
 };
 
 let init = [{ uses: actions.checkout }, { uses: actions.volta }];
@@ -134,6 +134,12 @@ async function buildCi(config, options) {
   let installNoLockfile = [
     { name: 'Install Dependencies (without lockfile)', run: 'rm pnpm-lock.yaml && pnpm install' },
   ];
+  let installNoFrozen = [
+    {
+      name: 'Install Dependencies (without frozen lockfile)',
+      run: 'pnpm install --no-frozen-lockfile',
+    },
+  ];
 
   if (config.lint?.eslint) {
     await verifyEslint(config, options);
@@ -186,7 +192,7 @@ async function buildCi(config, options) {
           ...init,
           ...depCache,
           ...pnpm,
-          ...installNoLockfile,
+          ...installNoFrozen,
           ...getDist,
           {
             name: 'Update TS Version',
@@ -235,7 +241,7 @@ async function buildCi(config, options) {
           ...init,
           ...depCache,
           ...pnpm,
-          ...install,
+          ...installNoLockfile,
           ...getDist,
           {
             name: 'test',
