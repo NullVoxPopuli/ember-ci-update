@@ -5,6 +5,8 @@ CLI to generate robust CI configs for ember projects
 ## Setup
 
 - Must have Node 16+
+- pnpm only.
+  yarn and npm are not supported.
 
 ## Usage
 
@@ -40,6 +42,8 @@ testApp: './testing/ember-app'
 
 lint:
   commits: true
+  cmd: pnpm lint
+  # or optionally specific paths:
   eslint:
     - "./ember-resources"
     - "./testing/ember-app"
@@ -72,20 +76,6 @@ support:
 
   # reads the config/ember-try.js config file
   ember-try: true
-
-  # specify specific entries. must be a subset of config/ember-try.js
-  ember-try:
-    - ember-3.25
-    - ember-3.26
-    - ember-3.28
-    - ember-4.0.0
-    - ember-4.4
-    - ember-concurrency-v1
-    - ember-release
-    - ember-beta
-    - ember-canary
-    - embroider-safe
-    - embroider-optimized
 
 # Optional, default is to not use semantic-release
 release:
