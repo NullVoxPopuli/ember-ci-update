@@ -34,7 +34,7 @@ const toMultiLineArray = (array, indentCount) => {
 };
 const eachLine = (str, callback) => {
   return str.split('\n').map(callback).join('\n');
-}
+};
 
 /**
  * @param {import('types').GitHubConfig} config
@@ -121,7 +121,7 @@ async function buildCi(config, options) {
             .split('')
             .filter((char) => char.match(/\S/))
             .join(''),
-        steps: extraJob.steps.map((step) => indent(4)).join('\n'),
+        steps: eachLine(yaml.dump(extraJob.steps), (line) => indent(3) + line),
       });
     }
   }
