@@ -16,6 +16,33 @@ When it's time to update the config, run `npx ember-ci-update` and commit the ch
 
 This tool generates real CI configs that can then be edited as you're used to for further customizations.
 
+
+### Minimal Config
+
+For ember v2 addons using JavaScript only, with no automated release
+
+```yaml
+provider: github
+template: "v2-addon"
+
+# ---------------------
+
+addon: './ember-velcro'
+testApp: './test-app'
+
+lint:
+  cmd: 'pnpm lint'
+
+build:
+  run: 'pnpm build'
+  expect: |
+    components/velcro/index.js
+    modifiers/velcro.js
+
+support:
+  ember-try: true
+```
+
 ## All config options and their defaults
 
 ```yml
