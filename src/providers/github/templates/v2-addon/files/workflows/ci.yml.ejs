@@ -104,6 +104,7 @@ jobs:
           pnpm --filter <%= testAppName %> exec glint --version;
           pnpm --filter <%= testAppName %> exec glint;
       <%_ } else { _%>
+        run: |
           pnpm --filter <%= testAppName %> exec tsc -v;
           pnpm --filter <%= testAppName %> exec tsc --build;
       <%_ } _%>
