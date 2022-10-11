@@ -62,7 +62,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/pnpm
-      - uses: wagoid/commitlint-github-action@v4.1.9
+      - uses: wagoid/commitlint-github-action@v5.2.0
         with:
           configFile: 'commitlint.config.cjs'
 <% } %>
@@ -98,15 +98,15 @@ jobs:
         run: 'pnpm add --save-dev ${{ matrix.typescript-scenario}}'
         working-directory: <%= testApp %>
       - name: 'Type checking'
-      <% if (support?.glint) { %>
+      <%_ if (support?.glint) { _%>
         run: |
           pnpm --filter <%= testAppName %> exec tsc -v;
           pnpm --filter <%= testAppName %> exec glint --version;
           pnpm --filter <%= testAppName %> exec glint;
-      <% } else { %>
+      <%_ } else { _%>
           pnpm --filter <%= testAppName %> exec tsc -v;
           pnpm --filter <%= testAppName %> exec tsc --build;
-      <% } %>
+      <%_ } _%>
 
   <% } %>
 
@@ -177,7 +177,7 @@ jobs:
       - uses: ./.github/actions/download-built-package
       - name: Release
         run: ./node_modules/.bin/semantic-release
-        working-directory: ./ember-resources
+        working-directory: <%= addon %>
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

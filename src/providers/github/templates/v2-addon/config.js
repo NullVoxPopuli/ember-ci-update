@@ -5,6 +5,7 @@ import { topLevelKeys as genericTopLevelKeys } from './utils.js';
 const topLevelKeys = [
   'build',
   'lint',
+  'fixes',
   'support',
   'release',
   'extra',

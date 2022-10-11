@@ -21,3 +21,8 @@ runs:
     with:
       name: dist
       path: ${{ env.dist }}
+<%_ if (fixes.includes('pnpm#4965')) { _%>
+  - name: 'Install dependencies'
+    shell: 'bash'
+    run: pnpm install
+<%_ } _%>
