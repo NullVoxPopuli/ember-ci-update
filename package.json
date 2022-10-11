@@ -1,6 +1,6 @@
 {
   "name": "ember-ci-update",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Asserts that a folder has contents",
   "main": "index.js",
   "type": "module",
