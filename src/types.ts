@@ -15,6 +15,7 @@ export type GitHubConfig = Config & {
 }
 
 export type GitHubV2AddonConfig = GitHubConfig & {
+  fixes?: string[];
   build: { run: string; expect: string },
   support?: {
     glint?: boolean;

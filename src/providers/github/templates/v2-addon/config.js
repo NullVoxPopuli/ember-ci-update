@@ -81,5 +81,9 @@ export function verifyConfig(config) {
     );
   }
 
-  return config;
+  /**
+   * Include defaults so ejs doesn't get angry when
+   * a key is missing
+   */
+  return { fixes: [], ...config };
 }
